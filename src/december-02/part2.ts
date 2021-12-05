@@ -1,6 +1,6 @@
 import { appLogger } from 'nightingale-app-console';
 
-type CommandDirection = 'forward' | 'down' | 'up';
+type CommandDirection = 'forward' | 'down' | 'up' | string;
 type CommandValue = number;
 type CourseCommand = [CommandDirection, CommandValue];
 
