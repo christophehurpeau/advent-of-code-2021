@@ -21,7 +21,7 @@ function calculateForAllBits<T>(
   binaryValues: BinaryValue[],
   calcFn: (bitValues: Bit[]) => T,
 ): T[] {
-  return binaryValues[0].split('').map((_, index) => {
+  return [...binaryValues[0]].map((_, index) => {
     return calcFn(binaryValues.map((values) => values[index] as Bit));
   });
 }
@@ -31,7 +31,7 @@ function filterForAllBitsUntilOneValue(
   filterFn: (binaryValues: BinaryValue[], bitValues: Bit[]) => BinaryValue[],
 ): BinaryValue {
   let inCourseBinaryValues = binaryValues;
-  binaryValues[0].split('').some((_, index) => {
+  [...binaryValues[0]].some((_, index) => {
     inCourseBinaryValues = filterFn(
       inCourseBinaryValues,
       inCourseBinaryValues.map((values) => values[index] as Bit),
@@ -59,7 +59,7 @@ const countBitsByValue = (bitValues: Bit[]): Record<Bit, number> => {
 const calculateMostCommonBit = (
   bitValues: Bit[],
   ifEquality: Bit | null = null,
-) => {
+): Bit => {
   const countByValue = countBitsByValue(bitValues);
   if (countByValue['1'] === countByValue['0']) {
     if (ifEquality === null) throw new Error('Unexpected equality');
@@ -71,7 +71,7 @@ const calculateMostCommonBit = (
 const calculateLeastCommonBit = (
   bitValues: Bit[],
   ifEquality: Bit | null = null,
-) => {
+): Bit => {
   const countByValue = countBitsByValue(bitValues);
   if (countByValue['1'] === countByValue['0']) {
     if (ifEquality === null) throw new Error('Unexpected equality');
