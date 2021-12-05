@@ -1,0 +1,106 @@
+{
+  "name": "advent-of-code-2021",
+  "private": true,
+  "author": "Christophe Hurpeau <christophe@hurpeau.com> (https://christophe.hurpeau.com)",
+  "repository": "https://github.com/christophehurpeau/advent-of-code-2021.git",
+  "homepage": "https://github.com/christophehurpeau/advent-of-code-2021",
+  "type": "module",
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
+  "packageManager": "yarn@3.1.1",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "node": {
+        "development": {
+          "import": "./dist/index-node12-dev.mjs"
+        },
+        "import": "./dist/index-node12.mjs"
+      }
+    }
+  },
+  "module:node": "./dist/index-node12.mjs",
+  "module:node-dev": "./dist/index-node12-dev.mjs",
+  "sideEffects": false,
+  "scripts": {
+    "build": "pob-build && yarn run build:definitions",
+    "build:definitions": "tsc -p tsconfig.build.json",
+    "clean": "rm -Rf dist",
+    "generate:test-coverage": "rm -Rf docs/coverage/ ; NODE_ENV=production BABEL_ENV=test jest --coverage --coverageReporters=pob-lcov-reporter --coverageDirectory=docs/coverage/",
+    "lint": "yarn run lint:prettier && tsc && yarn run lint:eslint",
+    "lint:eslint": "eslint --report-unused-disable-directives --resolve-plugins-relative-to . --quiet *.{js,cjs,mjs} src",
+    "lint:prettier": "prettier --check .",
+    "postinstall": "pob-root-postinstall",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "watch": "pob-watch"
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "singleQuote": true,
+    "arrowParens": "always"
+  },
+  "commitlint": {
+    "extends": [
+      "@pob/commitlint-config"
+    ]
+  },
+  "jest": {
+    "cacheDirectory": "./node_modules/.cache/jest",
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.ts",
+      "<rootDir>/src/**/*.test.ts"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json"
+    ],
+    "transform": {
+      "^.+\\.ts$": "babel-jest"
+    },
+    "testEnvironment": "node"
+  },
+  "pob": {
+    "babelEnvs": [
+      {
+        "target": "node",
+        "version": "12",
+        "formats": [
+          "es"
+        ]
+      }
+    ],
+    "entries": [
+      "index"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "7.16.0",
+    "@pob/commitlint-config": "3.3.0",
+    "@pob/eslint-config": "47.0.0",
+    "@pob/eslint-config-typescript": "47.0.1",
+    "@pob/root": "5.9.0",
+    "@types/jest": "27.0.3",
+    "@typescript-eslint/eslint-plugin": "5.5.0",
+    "@typescript-eslint/parser": "5.5.0",
+    "babel-jest": "27.4.2",
+    "babel-preset-latest-node": "5.5.1",
+    "eslint": "7.32.0",
+    "eslint-import-resolver-node": "0.3.6",
+    "eslint-plugin-import": "2.25.3",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-unicorn": "38.0.1",
+    "jest": "27.4.3",
+    "pob-babel": "28.7.0",
+    "pob-lcov-reporter": "5.5.0",
+    "prettier": "2.5.1",
+    "rollup": "2.60.2",
+    "typescript": "4.5.2"
+  }
+}
