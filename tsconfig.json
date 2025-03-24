@@ -13,7 +13,7 @@
     "lib": [
       "dom",
       "esnext"
-    ] /* Polyfills are imported either by babel or with polyfill.io */,
+    ] /* Polyfills are imported either by babel or with https://cdnjs.cloudflare.com/polyfill/ */,
     // "jsx": "preserve",                     /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
     "isolatedModules": true /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */,
 
